@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Electricity Locations Dashboard</title>
+<style>
+:root{--blue:#3478f6;--blue2:#eaf2ff;--pink:#e84b98;--green:#25b777;--yellow:#f5c928;--ink:#17243a;--muted:#8390a3;--line:#edf1f6;--bg:#f6f8fb;--card:#fff;--shadow:0 2px 8px rgba(30,55,90,.035)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,"Noto Sans Thai","Leelawadee UI",Tahoma,sans-serif;color:var(--ink);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1420px;margin:auto;padding:28px 28px 44px}.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#26354a}.cloud{color:#8290a4;font-size:16px}.head-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.btn{border:1px solid #dfe6ef;background:white;color:#32445e;border-radius:10px;padding:10px 14px;display:inline-flex;align-items:center;gap:8px;font-weight:600;box-shadow:0 1px 2px #10182808;text-decoration:none}.btn.primary{background:#e8f1ff;border-color:#d4e3ff;color:#245fbf}.btn:hover{filter:brightness(.985)}input[type=file]{display:none}.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:24px}.hero h1{font-size:27px;line-height:1.25;margin:0 0 6px;font-weight:800;letter-spacing:-.5px}.hero p{margin:0;color:#748198;font-size:13px}.status{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:#8290a2;font-size:12px}.status:before{content:"";width:7px;height:7px;border-radius:50%;background:#f3b83b}.status.ok:before{background:#27b576}.status.error:before{background:#f28a73}.layout{display:grid;grid-template-columns:244px minmax(0,1fr);gap:20px}.sidebar{display:flex;flex-direction:column;gap:18px}.panel,.metric{background:var(--card);border:1px solid #edf1f6;border-radius:17px;box-shadow:var(--shadow)}.filter-panel{padding:20px}.panel-title{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:750;margin:0 0 16px}.mini-icon{width:34px;height:34px;display:inline-flex;justify-content:center;align-items:center;border-radius:10px;color:var(--blue);background:#edf4ff;font-size:17px;flex-shrink:0}.mini-icon.yellow{color:#c18e00;background:#fff8d2}.mini-icon.pink{color:var(--pink);background:#fff0f7}.mini-icon.green{color:#20a36b;background:#e3fbef}.select{width:100%;padding:12px 11px;border:1.5px solid #d9e3f0;border-radius:11px;background:#fff;color:#23354d;outline:none}.filter-input{width:100%;padding:12px 11px;border:1.5px solid #d9e3f0;border-radius:11px;background:#fff;color:#23354d;outline:none;margin-bottom:14px}.filter-input:focus,.select:focus{border-color:#7aa9ff;box-shadow:0 0 0 3px #eaf2ff}.filter-label{display:block;color:#6e7c91;font-size:11px;font-weight:700;margin:0 0 7px}.filter-group{margin-bottom:13px}.doc-results-panel{margin-bottom:18px}.doc-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 21px 20px}.doc-result{background:#f8fafc;border:1px solid #edf1f6;border-radius:11px;padding:12px 14px;min-width:0}.doc-result-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}.doc-number-label{color:#8794a7;font-size:10px}.doc-number{font-size:13px;font-weight:800;color:#2869d7;overflow-wrap:anywhere}.doc-number.missing{color:#b91c1c;background:#fee2e2;border-radius:6px;padding:3px 6px}.doc-result-name{font-weight:700;color:#31425c;font-size:12px;overflow-wrap:anywhere}.doc-result-place{color:#7d899b;font-size:11px;line-height:1.6;margin-top:4px;overflow-wrap:anywhere}.doc-result-count{font-size:11px;color:#7b889b;background:#f2f5f9;border-radius:20px;padding:6px 10px;white-space:nowrap}.office-doc-summary{margin-bottom:18px}.office-doc-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 21px}.office-doc-card{border:1px solid #e8edf4;border-radius:13px;padding:16px 18px;background:#f9fbfd;min-width:0}.office-doc-card.has-doc{background:#f0fbf5;border-color:#d4f2e1}.office-doc-card.missing-doc{background:#fff4f4;border-color:#ffdede}.office-doc-card-label{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;font-weight:700}.office-doc-mark{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:50%;font-size:13px;font-weight:900}.has-doc .office-doc-mark{background:#d1fae5;color:#087443}.missing-doc .office-doc-mark{background:#fee2e2;color:#b91c1c}.office-doc-card-value{margin-top:8px;font-size:30px;line-height:1.2;font-weight:850;letter-spacing:-.5px}.has-doc .office-doc-card-value{color:#168252}.missing-doc .office-doc-card-value{color:#b91c1c}.office-doc-card-value small{font-size:12px;font-weight:600;letter-spacing:0}.office-doc-note{padding:11px 21px 17px;font-size:11px;line-height:1.7;color:#8995a7}.info{background:#f0f6ff;border:1px solid #e1edff;color:#5179b7;border-radius:12px;padding:13px;margin-top:12px;font-size:11px;line-height:1.8}.side-summary{padding:20px;text-align:center}.side-label{color:#8a96a7;font-size:12px;margin-bottom:10px}.side-value{font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--blue);line-height:1.15;overflow-wrap:anywhere}.side-note{font-size:11px;color:#98a3b4;margin-top:6px;line-height:1.6}.main{min-width:0}.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:18px}.metric{display:flex;align-items:center;gap:14px;padding:20px;min-height:104px}.metric .label{font-size:12px;color:#8591a1;margin-bottom:3px}.metric .value{font-size:27px;font-weight:800;line-height:1.2;letter-spacing:-.4px}.metric .suffix{font-size:12px;color:#8591a1;font-weight:500}.middle{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-bottom:18px}.province-percent-chart{display:flex;flex-direction:column;gap:13px;width:100%;padding:2px 0 4px}.province-percent-row{display:grid;grid-template-columns:minmax(120px,220px) minmax(40px,1fr) 76px;gap:14px;align-items:center}.province-name{font-size:12px;font-weight:750;color:#31425c;overflow-wrap:anywhere}.province-percent-sub{font-size:10px;font-weight:500;color:#8a96a7;margin-top:3px}.province-bar-track{height:12px;background:#f0f3f8;border-radius:20px;overflow:hidden}.province-bar-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#3478f6,#67a0ff)}.province-percent-value{text-align:right;font-size:13px;font-weight:800;color:#2869d7;white-space:nowrap}.province-chart-note{font-size:11px;line-height:1.7;color:#8995a7;margin-bottom:14px}.province-chart-summary{font-size:11px;color:#7d899b;background:#f8fafc;border:1px solid #edf1f6;border-radius:9px;padding:10px 12px;margin-top:6px}.panel{padding:21px}.panel .panel-title{margin-bottom:16px}.chart-content{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:210px}.donut-wrap{width:166px;height:166px;position:relative}.donut-wrap canvas{width:100%;height:100%}.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none}.donut-center strong{font-size:25px}.donut-center span{font-size:10px;color:#9aa5b5}.legend{display:flex;justify-content:center;gap:13px;margin-top:12px;color:#8793a4;font-size:11px;flex-wrap:wrap}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}.locations{display:flex;flex-direction:column;gap:10px}.location-card{border-left:3px solid #6ca4ff;background:#f8fafc;border-radius:9px;padding:12px 13px;min-width:0}.location-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}.location-name{font-size:12px;color:#31425c;font-weight:750;overflow-wrap:anywhere}.location-type{font-size:10px;color:#3976d8;background:#eef5ff;border-radius:20px;padding:4px 8px;white-space:nowrap;flex-shrink:0}.location-address{font-size:11px;line-height:1.6;color:#6c7a8f;overflow-wrap:anywhere}.location-meta{font-size:10px;color:#9ba5b3;margin-top:7px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.empty{color:#99a3b2;font-size:12px;text-align:center;padding:26px 8px;line-height:1.8}.table-panel{padding:20px 0 0;overflow:hidden}.table-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 21px 16px}.table-head .panel-title{margin:0}.count{background:#f2f5f9;color:#758298;font-size:11px;padding:6px 10px;border-radius:20px;white-space:nowrap}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:760px}thead{background:#f8fafc}th{text-align:left;color:#7f8b9c;font-size:11px;font-weight:700;padding:12px 16px;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}td{padding:14px 16px;border-bottom:1px solid #f0f3f7;font-size:12px;color:#526075;vertical-align:top}tbody tr:hover{background:#fbfcfe}.pill{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;background:#eef5ff;color:#3976d8;white-space:nowrap}.status-pill{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;background:#e8fbf1;color:#21835a}.status-pill.pending{background:#fee2e2;color:#b91c1c;font-weight:700}.address-cell{min-width:180px;max-width:300px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}.footer{padding-top:17px;text-align:right;font-size:10px;color:#a0aaba}.hide{display:none!important}
+@media(max-width:950px){.shell{padding:20px 16px 34px}.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr}.metrics{gap:12px}.metric{padding:16px;gap:10px}.middle{grid-template-columns:1fr 1fr}.hero h1{font-size:24px}}
+@media(max-width:650px){.doc-results,.office-doc-cards{grid-template-columns:1fr;padding-left:16px;padding-right:16px}.office-doc-note{padding-left:16px;padding-right:16px}.topline{margin-bottom:22px}.hero{display:block}.hero .btn{margin-top:15px}.layout,.sidebar,.metrics,.middle{grid-template-columns:1fr}.metric{min-height:86px}.metric .value{font-size:25px}.panel{padding:17px}.filter-panel,.side-summary{padding:17px}.middle{gap:14px}.table-head{padding:0 16px 14px}.hero h1{font-size:23px}.head-actions .btn span.long{display:none}.brand{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+  <div class="topline">
+    <div class="brand"><span class="mini-icon" style="width:28px;height:28px;border-radius:8px">⌖</span><span>Electricity Locations Dashboard</span><span class="cloud">☁</span></div>
+    <div class="head-actions">
+      <button class="btn" id="reloadBtn" title="โหลดข้อมูลใหม่">↻ <span class="long">รีเฟรชข้อมูล</span></button>
+      <button class="btn primary" id="uploadBtn">⇧ <span>อัปโหลด CSV</span></button>
+      <input type="file" id="csvFile" accept=".csv,text/csv" />
+    </div>
+  </div>
+  <div class="hero">
+    <div>
+      <h1>⌖ Dashboard สถานที่การไฟฟ้า</h1>
+      <p>ข้อมูลการไฟฟ้าตามจังหวัด พร้อมเลขที่เอกสาร วันที่ และสถานะการดำเนินการ</p>
+      <div class="status" id="status">กำลังเชื่อมต่อข้อมูลจาก Google Sheets…</div>
+    </div>
+    <a class="btn" href="https://docs.google.com/spreadsheets/d/1qwOuxCtAjQzmN2xhMcfsGOFk89D99T-nCyhAbzQu7Nc/edit?gid=1#gid=1" target="_blank" rel="noopener">↗ เปิด Google Sheets</a>
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <section class="panel filter-panel">
+        <h2 class="panel-title"><span>⌕</span> <span>ค้นหาสถานที่การไฟฟ้า</span></h2>
+        <label class="filter-label" for="searchInput">ค้นหาชื่อสำนักงานหรือเลขที่เอกสาร</label>
+        <input class="filter-input" id="searchInput" type="search" placeholder="พิมพ์ชื่อสถานที่ / เลขที่เอกสาร" />
+        <div class="filter-group" id="provinceFilterWrap">
+          <label class="filter-label" for="provinceFilter">จังหวัด</label>
+          <select class="select" id="provinceFilter"><option value="__all">ทุกจังหวัด</option></select>
+        </div>
+        <div class="filter-group" id="districtFilterWrap">
+          <label class="filter-label" for="districtFilter">อำเภอ / เขต</label>
+          <select class="select" id="districtFilter"><option value="__all">ทุกอำเภอ / เขต</option></select>
+        </div>
+        <div class="filter-group hide" id="areaFilterWrap">
+          <label class="filter-label" id="areaFilterLabel" for="areaFilter">กฟส. ประจำจังหวัด</label>
+          <select class="select" id="areaFilter"><option value="__all">ทุก กฟส.</option></select>
+        </div>
+        <div class="info" id="dataHint">เลือกจังหวัดเพื่อแสดง กฟส. ของจังหวัดนั้น แล้วเลือกอำเภอเพื่อจำกัดผลการค้นหา และดูเลขที่เอกสารที่ตรงกับรายการ<br/>หากชีตไม่เปิดให้อ่านอัตโนมัติ ให้ดาวน์โหลดเป็น CSV แล้วนำเข้าด้วยปุ่มด้านบน</div>
+      </section>
+      <section class="panel side-summary">
+        <div class="side-label" id="sideLabel">สถานที่ในพื้นที่ที่เลือก</div>
+        <div class="side-value" id="sideValue">—</div>
+        <div class="side-note" id="sideNote">ทุกจังหวัดและ กฟส.</div>
+      </section>
+    </aside>
+    <main class="main">
+      <div class="metrics">
+        <section class="metric"><span class="mini-icon">⌖</span><div><div class="label">กฟส. / การไฟฟ้าทั้งหมด</div><div class="value" id="locationCount">—</div></div></section>
+        
+        <section class="metric"><span class="mini-icon green">▤</span><div><div class="label">มีเลขที่เอกสารแล้ว</div><div class="value"><span id="typeCount">—</span> <span class="suffix" id="typeUnit">แห่ง</span></div></div></section>
+      </div>
+      <section class="panel office-doc-summary" aria-labelledby="officeDocSummaryTitle">
+        <div class="table-head"><h2 class="panel-title" id="officeDocSummaryTitle">สรุปเลขที่เอกสารของ กฟส. ประจำจังหวัด</h2><span class="doc-result-count" id="officeDocTotal">กฟส. ทั้งหมด 87 แห่ง</span></div>
+        <div class="office-doc-cards">
+          <div class="office-doc-card has-doc"><div class="office-doc-card-label"><span class="office-doc-mark">✓</span>มีเลขที่เอกสารแล้ว</div><div class="office-doc-card-value" id="officeDocHasCount">15 <small>แห่ง</small></div></div>
+          <div class="office-doc-card missing-doc"><div class="office-doc-card-label"><span class="office-doc-mark">!</span>ไม่มีเลขที่เอกสาร</div><div class="office-doc-card-value" id="officeDocMissingCount">72 <small>แห่ง</small></div></div>
+        </div>
+        <div class="office-doc-note" id="officeDocSummaryNote">สรุปภาพรวม กฟส. ทั้งหมด 87 แห่ง · มีเลขที่เอกสาร 15 แห่ง และไม่มีเลขที่เอกสาร 72 แห่ง</div>
+      </section>
+      <section class="panel doc-results-panel">
+        <div class="table-head"><h2 class="panel-title">เลขที่เอกสารจากผลการค้นหา</h2><span class="doc-result-count" id="docResultCount">รอข้อมูล</span></div>
+        <div class="doc-results" id="documentResults"><div class="empty">กำลังโหลดข้อมูลเอกสาร…</div></div>
+      </section>
+      <section class="panel table-panel">
+        <div class="table-head"><h2 class="panel-title">ข้อมูลสถานที่/สำนักงานการไฟฟ้า</h2><span class="count" id="tableCount">ทั้งหมด 0 รายการ</span></div>
+        <div class="table-scroll"><table><thead id="tableHead"><tr><th>ลำดับ</th><th>ชื่อสถานที่</th><th>ประเภท</th><th>ที่อยู่</th><th>จังหวัด/พื้นที่</th><th>โทรศัพท์</th><th>สถานะ</th></tr></thead><tbody id="tableBody"><tr><td colspan="7" class="empty">กำลังรอข้อมูลจากชีต…</td></tr></tbody></table></div>
+      </section>
+      <div class="footer">ข้อมูลแสดงตามคอลัมน์ที่พบใน Google Sheets หรือไฟล์ CSV ที่นำเข้า</div>
+    </main>
+  </div>
+</div>
+<script>
+(()=>{
+  'use strict';
+  const SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/1qwOuxCtAjQzmN2xhMcfsGOFk89D99T-nCyhAbzQu7Nc/export?format=csv&gid=1';
+  const EMBEDDED_CSV = "จังหวัด,การไฟฟ้า,เลขที่เอกสาร,วันที่,สถานะ\r\nพิษณุโลก,กฟจ.พิษณุโลก,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.พรหมพิราม,น.2กฟส.พพร.(ปร.)1369/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.วงฆ้อง,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.นครไทย,น.2กฟส.นท.ผปร.1272/2569,19 ต.ค. 2569,บันทึกแล้ว\r\nพิษณุโลก,กฟส.ชาติตระการ,น.2กฟส.นท.ผฝร.1245/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.บ้านแยง,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.วังทอง,น.2กฟส.วท.(ปร.)2871/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.หนองพระ,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.ทรัพย์ไพรวัลย์,น.2กฟส.วท.()2920/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.เนินมะปราง,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.บางระกำ,น.2กฟส.บรก.(ปร.)1005/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.ทุ่งอ้ายโฮ,น.2กฟส.บรก.(ปร.)1006/2569,-,บันทึกแล้ว\r\nพิษณุโลก,กฟส.บางกระทุ่ม,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.บ้านใหม่,,,รอดำเนินการ\r\nพิษณุโลก,กฟส.วัดโบสถ์,,,รอดำเนินการ\r\nสุโขทัย,กฟจ.สุโขทัย,,,รอดำเนินการ\r\nสุโขทัย,กฟส.คีรีมาศ,,,รอดำเนินการ\r\nสุโขทัย,กฟส.บ้านด่านลานหอย,,,รอดำเนินการ\r\nสุโขทัย,กฟส.ศรีสำโรง,,,รอดำเนินการ\r\nสุโขทัย,กฟส.กงไกรลาศ,,,รอดำเนินการ\r\nสุโขทัย,กฟส.สวรรคโลก,,,รอดำเนินการ\r\nสุโขทัย,กฟส.ศรีนคร,,,รอดำเนินการ\r\nสุโขทัย,กฟส.ทุ่งเสลี่ยม,น.2กฟส.ทสล.(ปร.)755/2569,-,บันทึกแล้ว\r\nสุโขทัย,กฟส.ศรีสัชนาลัย,,,รอดำเนินการ\r\nตาก,กฟจ.ตาก,,,รอดำเนินการ\r\nตาก,กฟส.วังเจ้า,,,รอดำเนินการ\r\nตาก,กฟส.วังประจบ,,,รอดำเนินการ\r\nตาก,กฟส.บ้านตาก,,,รอดำเนินการ\r\nตาก,กฟส.สามเงา,,,รอดำเนินการ\r\nตาก,กฟส.แม่สอด,น.2กฟส.มสด.(ปบ.)1135/2569,20 ต.ค. 2569,บันทึกแล้ว\r\nตาก,กฟส.ท่าสองยาง,,,รอดำเนินการ\r\nตาก,กฟส.แม่ระมาด,,,รอดำเนินการ\r\nตาก,กฟส.พบพระ,,,รอดำเนินการ\r\nตาก,กฟส.อุ้มผาง,,,รอดำเนินการ\r\nกำแพงเพชร,กฟจ.กำแพงเพชร,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.โกสัมพีนคร,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.พรานกระต่าย,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.ลานกระบือ,น.2กฟส.ลกบ.(ปร.)502/2569,-,บันทึกแล้ว\r\nกำแพงเพชร,กฟส.ไทรงาม,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.คลองลาน,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.ขาณุวรลักษบุรี,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.บึงสามัคคี,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.คลองขลุง,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.ทรายทองวัฒนา,,,รอดำเนินการ\r\nกำแพงเพชร,กฟส.ปางศิลาทอง,,,รอดำเนินการ\r\nพิจิตร,กฟจ.พิจิตร,,,รอดำเนินการ\r\nพิจิตร,กฟส.สากเหล็ก,,,รอดำเนินการ\r\nพิจิตร,กฟส.โพธิ์ประทับช้าง,,,รอดำเนินการ\r\nพิจิตร,กฟส.วังทรายพูน,,,รอดำเนินการ\r\nพิจิตร,กฟส.วชิรบารมี,,,รอดำเนินการ\r\nพิจิตร,กฟส.ตะพานหิน,,,รอดำเนินการ\r\nพิจิตร,กฟส.บางมูลนาก,,,รอดำเนินการ\r\nพิจิตร,กฟส.ดงเจริญ,,,รอดำเนินการ\r\nพิจิตร,กฟส.โพทะเล,,,รอดำเนินการ\r\nพิจิตร,กฟส.บึงนาราง,,,รอดำเนินการ\r\nพิจิตร,กฟส.ทับคล้อ,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟจ.อุตรดิตถ์,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.ทองแสนขัน,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.ท่าปลา,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.ลับแล,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.ตรอน,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.พิชัย,น.2กฟส.พิชัย.(ปร)1527/2569,20 ต.ค. 2569,บันทึกแล้ว\r\nอุตรดิตถ์,กฟส.น้ำปาด,น.2กฟส.นป.()1347/2569,-,บันทึกแล้ว\r\nอุตรดิตถ์,กฟส.บ้านโคก,,,รอดำเนินการ\r\nอุตรดิตถ์,กฟส.ฟากท่า,,,รอดำเนินการ\r\nแพร่,กฟจ.แพร่,,,รอดำเนินการ\r\nแพร่,กฟส.สูงเม่น,,,รอดำเนินการ\r\nแพร่,กฟส.ลอง,,,รอดำเนินการ\r\nแพร่,กฟส.สอง,น.2กฟส.สอง.(ปร.)1510/2569,19 ต.ค. 2569,บันทึกแล้ว\r\nแพร่,กฟส.ร้องกวาง,น.2กฟส.รก.558/2569,-,บันทึกแล้ว\r\nแพร่,กฟส.หนองม่วงไข่,,,รอดำเนินการ\r\nแพร่,กฟส.เด่นชัย,,,รอดำเนินการ\r\nแพร่,กฟส.วังชิ้น,,,รอดำเนินการ\r\nน่าน,กฟจ.น่าน,,,รอดำเนินการ\r\nน่าน,กฟส.แม่จริม,,,รอดำเนินการ\r\nน่าน,กฟส.บ้านหลวง,,,รอดำเนินการ\r\nน่าน,กฟส.สันติสุข,,,รอดำเนินการ\r\nน่าน,กฟส.เวียงสา,น.2กฟส.วยส.(ธก.)1015/2569,20 ต.ค. 2569,บันทึกแล้ว\r\nน่าน,กฟส.นาน้อย,,,รอดำเนินการ\r\nน่าน,กฟส.นาหมื่น,,,รอดำเนินการ\r\nน่าน,กฟส.ปัว,,,รอดำเนินการ\r\nน่าน,กฟส.ท่าวังผา,,,รอดำเนินการ\r\nน่าน,กฟส.ทุ่งช้าง,,,รอดำเนินการ\r\nน่าน,กฟส.เชียงกลาง,,,รอดำเนินการ\r\nน่าน,กฟส.เฉลิมพระเกียรติ,,,รอดำเนินการ\r\nน่าน,กฟส.สองแคว,,,รอดำเนินการ\r\nน่าน,กฟส.บ่อเกลือ,,,รอดำเนินการ";
+  const $=id=>document.getElementById(id);
+  let allRows=[],filteredRows=[],headers=[],map={},areaKey='province',extraFilterKey=null,officeFilterKey=null;
+  const aliases={
+    name:['ชื่อสถานที่','ชื่อสำนักงานการไฟฟ้า','ชื่อสำนักงาน','ชื่อหน่วยงาน','ชื่อการไฟฟ้า','ชื่อสาขา','ชื่อจุดบริการ','ชื่อสถานี','สถานที่','จุดให้บริการ','สำนักงาน','หน่วยงาน','สาขา','สถานีไฟฟ้า','ชื่อสถานที่ตั้ง','locationname','location name','office name','officename','branch name','branchname','site name','sitename','facility name','name','location','office','branch','site'],
+    type:['ประเภทสถานที่','ประเภทสำนักงาน','ประเภทหน่วยงาน','ประเภทการไฟฟ้า','ประเภทสถานที่บริการ','ประเภท','ชนิดสถานที่','type','location type','locationtype','office type','officetype','category','facility type','facilitytype','kind'],
+    province:['จังหวัด','จังหวัดที่ตั้ง','province','provincename','province name','changwat'],
+    district:['อำเภอ','เขต','อำเภอ/เขต','district','amphoe','khet'],
+    subdistrict:['ตำบล','แขวง','ตำบล/แขวง','subdistrict','tambon','khwaeng'],
+    serviceOffice:['การไฟฟ้า','ชื่อการไฟฟ้า','กฟส. ประจำจังหวัด','กฟส.ของจังหวัด','กฟส. จังหวัด','ชื่อ กฟส.','ชื่อกฟส','กฟส.','กฟส','การไฟฟ้าส่วนภูมิภาคสาขา','สำนักงานการไฟฟ้าส่วนภูมิภาคสาขา','สาขาการไฟฟ้าส่วนภูมิภาค','สำนักงาน กฟส.','สำนักงานกฟส','provincial electricity office','service office','serviceoffice','electricity service office','branch office'],
+    region:['ภาค','เขตการไฟฟ้า','เขตพื้นที่','พื้นที่รับผิดชอบ','พื้นที่','ภูมิภาค','region','region name','regionname','area','zone','electricity area'],
+    address:['ที่อยู่','ที่ตั้ง','ที่อยู่สถานที่','ที่อยู่สำนักงาน','สถานที่ตั้ง','address','full address','fulladdress','location address','locationaddress'],
+    phone:['โทรศัพท์','เบอร์โทร','เบอร์โทรศัพท์','หมายเลขโทรศัพท์','ติดต่อ','phone','telephone','tel','contact number','contactnumber'],
+    status:['สถานะ','สถานะการใช้งาน','สถานะสถานที่','status','state'],
+    lat:['ละติจูด','พิกัดละติจูด','latitude','lat'],
+    lon:['ลองจิจูด','พิกัดลองจิจูด','longitude','lon','lng','long'],
+    date:['วันที่ปรับปรุง','วันที่อัปเดต','วันที่','updated at','updatedat','last updated','lastupdated','date','timestamp'],
+    documentNumber:['เลขที่เอกสาร','เลขเอกสาร','หมายเลขเอกสาร','เลขที่หนังสือ','เลขหนังสือ','เลขที่อ้างอิง','เลขอ้างอิง','เลขที่เอกสารอ้างอิง','เลขที่ใบงาน','เลขที่คำขอ','document number','documentnumber','document no','documentno','doc number','docnumber','doc no','docno','reference number','referencenumber','document id','documentid']
+  };
+  function text(v){return v==null?'':String(v).trim()}
+  function normalize(s){return text(s).toLowerCase().replace(/[\s_\-()./\\:：]/g,'').replace(/[ฯๆ]/g,'')}
+  function esc(s){return text(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function parseCSV(src){const out=[];let row=[],field='',quoted=false;for(let i=0;i<src.length;i++){const c=src[i];if(quoted){if(c==='"'&&src[i+1]==='"'){field+='"';i++}else if(c==='"')quoted=false;else field+=c}else if(c==='"')quoted=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field.replace(/\r$/,''));if(row.some(x=>text(x)!==''))out.push(row);row=[];field=''}else field+=c}if(field.length||row.length){row.push(field.replace(/\r$/,''));if(row.some(x=>text(x)!==''))out.push(row)}return out}
+  function findCol(h,key){const hs=h.map(normalize),list=aliases[key].map(normalize);for(const a of list){const i=hs.findIndex(v=>v===a);if(i>=0)return i}for(const a of list){const i=hs.findIndex(v=>v.length>1&&a.length>1&&v.includes(a));if(i>=0)return i}return -1}
+  function headerScore(row){const n=normalize(row.join(' '));let score=0;for(const w of ['สถานที่','สำนักงาน','ชื่อ','จังหวัด','อำเภอ','กฟส','ประเภท','ที่อยู่','โทรศัพท์','พิกัด','เลขที่เอกสาร','document number','doc no','location','office','province','address','type','latitude','longitude'])if(n.includes(normalize(w)))score++;return score}
+  function makeRows(matrix){if(!matrix||matrix.length<2)throw new Error('ไม่พบข้อมูลสถานที่ในไฟล์');let hi=0,bs=-1;matrix.slice(0,8).forEach((r,i)=>{const s=headerScore(r);if(s>bs){bs=s;hi=i}});const hs=matrix[hi].map((h,i)=>text(h)||`คอลัมน์ ${i+1}`);const data=matrix.slice(hi+1).filter(r=>r.some(v=>text(v)!==''));const m={};for(const k of Object.keys(aliases))m[k]=findCol(hs,k);if(m.serviceOffice<0){m.serviceOffice=hs.findIndex(h=>normalize(h)==='การไฟฟ้า')}if(m.name<0)m.name=m.serviceOffice>=0?m.serviceOffice:(m.province>=0?m.province:0);const records=data.map((cells,index)=>{const vals=hs.map((_,i)=>text(cells[i]));const get=k=>m[k]>=0?text(vals[m[k]]):'';const name=get('name')||`สถานที่ ${index+1}`;return{id:index+1,vals,name,type:get('type'),province:get('province'),district:get('district'),subdistrict:get('subdistrict'),serviceOffice:get('serviceOffice'),region:get('region'),address:get('address'),phone:get('phone'),status:get('status'),lat:get('lat'),lon:get('lon'),date:get('date'),documentNumber:get('documentNumber')}}).filter(r=>r.vals.some(v=>v!==''));return{headers:hs,records,map:m}}
+  function uniqueVals(rows,key){return [...new Set(rows.map(r=>text(r[key])).filter(Boolean))]}
+  function keyLabel(key){return({province:'จังหวัด',serviceOffice:'กฟส. ประจำจังหวัด',region:'พื้นที่/เขตการไฟฟ้า',district:'อำเภอ/เขต',type:'ประเภทสถานที่'})[key]||'พื้นที่'}
+  function getAreaKey(){return map.province>=0?'province':map.region>=0?'region':map.district>=0?'district':map.type>=0?'type':null}
+  function getAreaValue(r){if(areaKey)return text(r[areaKey])||'ไม่ระบุ';return 'ทุกพื้นที่'}
+  function setStatus(msg,type=''){const el=$('status');el.textContent=msg;el.className='status'+(type?' '+type:'')}
+  function fillSelect(id, values, allLabel, preserve=true){const el=$(id);const previous=el.value;el.innerHTML=`<option value="__all">${allLabel}</option>`+values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');if(preserve&&values.includes(previous))el.value=previous;}
+  function updateDistrictOptions(){if(map.district<0)return;const province=$('provinceFilter').value;const relevant=province!=='__all'&&map.province>=0?allRows.filter(r=>text(r.province)===province):allRows;fillSelect('districtFilter',uniqueVals(relevant,'district').sort((a,b)=>a.localeCompare(b,'th')),'ทุกอำเภอ / เขต',true)}
+  function updateServiceOfficeOptions(){if(!officeFilterKey)return;const province=$('provinceFilter').value;const relevant=province!=='__all'&&map.province>=0?allRows.filter(r=>text(r.province)===province):allRows;fillSelect('areaFilter',uniqueVals(relevant,officeFilterKey).sort((a,b)=>a.localeCompare(b,'th')),'ทุก กฟส. / สำนักงาน',true)}
+  function loadRecords(result,source){headers=result.headers;allRows=result.records;map=result.map;areaKey=getAreaKey();officeFilterKey=map.serviceOffice>=0?'serviceOffice':(map.name>=0?'name':null);extraFilterKey=officeFilterKey;
+    $('provinceFilterWrap').classList.toggle('hide',map.province<0);$('districtFilterWrap').classList.toggle('hide',map.district<0);$('areaFilterWrap').classList.toggle('hide',!officeFilterKey);
+    fillSelect('provinceFilter',uniqueVals(allRows,'province').sort((a,b)=>a.localeCompare(b,'th')),'ทุกจังหวัด',true);updateDistrictOptions();updateServiceOfficeOptions();
+    if(map.serviceOffice>=0){$('areaFilterLabel').textContent='กฟส. / การไฟฟ้าในจังหวัด';$('dataHint').textContent=map.district>=0?'เลือกจังหวัดเพื่อแสดงเฉพาะ กฟส. ของจังหวัดนั้น จากนั้นเลือกอำเภอและค้นหาเลขที่เอกสารได้':'ข้อมูลชุดนี้มีคอลัมน์จังหวัด การไฟฟ้า เลขที่เอกสาร วันที่ และสถานะ แต่ไม่มีคอลัมน์อำเภอ จึงค้นหาด้วยจังหวัด ชื่อการไฟฟ้า หรือเลขที่เอกสารได้';}else{$('areaFilterLabel').textContent='กฟส. / สำนักงานในจังหวัด';$('dataHint').textContent='รายการตัวเลือกสำนักงานแยกตามจังหวัดโดยใช้คอลัมน์ชื่อสถานที่ หากชื่อสถานที่ไม่ใช่ชื่อ กฟส. โดยตรง แนะนำให้เพิ่มคอลัมน์ “กฟส.” ใน Google Sheets หรือ CSV เพื่อระบุให้แม่นยำ';}
+    $('sideLabel').textContent='สถานที่ตามผลการค้นหา';filtered();setStatus(`โหลดข้อมูลสำเร็จ ${allRows.length.toLocaleString('th-TH')} รายการ · ${source}`,'ok')}
+  function filtered(){const province=$('provinceFilter').value;const district=$('districtFilter').value;const area=$('areaFilter').value;const query=text($('searchInput').value).toLocaleLowerCase('th-TH');filteredRows=allRows.filter(r=>{
+      if(map.province>=0&&province!=='__all'&&text(r.province)!==province)return false;
+      if(map.district>=0&&district!=='__all'&&text(r.district)!==district)return false;
+      if(extraFilterKey&&area!=='__all'&&text(r[extraFilterKey])!==area)return false;
+      if(query){const haystack=[r.name,r.documentNumber,r.province,r.district,r.subdistrict,r.serviceOffice,r.address,r.region,r.phone,r.type,r.status].map(text).join(' ').toLocaleLowerCase('th-TH');if(!haystack.includes(query))return false;}
+      return true;
+    });render()}
+  function sortRows(rows){if(map.date>=0)return [...rows].sort((a,b)=>{const da=Date.parse(a.date),db=Date.parse(b.date);return (Number.isFinite(db)?db:b.id)-(Number.isFinite(da)?da:a.id)});return [...rows]}
+  function renderProvincePercentChart(){
+    const chart=$('provincePercentChart');
+    if(!chart)return;
+    if(!allRows.length){chart.innerHTML='<div class="empty">ยังไม่มีข้อมูลจังหวัด กรุณาโหลด Google Sheets หรือนำเข้า CSV</div>';return}
+    // Count unique service offices within each province, not duplicate rows/documents.
+    const byProvince=new Map();
+    allRows.forEach((r,index)=>{
+      const province=text(r.province)||'ไม่ระบุจังหวัด';
+      const office=(map.serviceOffice>=0?text(r.serviceOffice):'')||text(r.name)||`ไม่ระบุ กฟส. ${index+1}`;
+      if(!byProvince.has(province))byProvince.set(province,new Set());
+      byProvince.get(province).add(office.toLocaleLowerCase('th-TH'));
+    });
+    const distribution=[...byProvince.entries()]
+      .map(([province,offices])=>({province,count:offices.size,percent:offices.size/TOTAL_GFS_COUNT*100}))
+      .sort((a,b)=>b.count-a.count||a.province.localeCompare(b.province,'th'));
+    const counted=distribution.reduce((sum,item)=>sum+item.count,0);
+    chart.innerHTML=distribution.map(item=>{
+      const pct=item.percent.toLocaleString('th-TH',{minimumFractionDigits:1,maximumFractionDigits:1});
+      const width=Math.min(100,Math.max(0,item.percent));
+      return `<div class="province-percent-row"><div><div class="province-name">${esc(item.province)}</div><div class="province-percent-sub">${item.count.toLocaleString('th-TH')} กฟส.</div></div><div class="province-bar-track" role="img" aria-label="${esc(item.province)} ${pct}%"><div class="province-bar-fill" style="width:${width}%"></div></div><div class="province-percent-value">${pct}%</div></div>`;
+    }).join('')+`<div class="province-chart-summary">นับ กฟส. ไม่ซ้ำที่พบในข้อมูล ${counted.toLocaleString('th-TH')} แห่ง · ใช้ยอดอ้างอิงทั้งหมด ${TOTAL_GFS_COUNT} แห่ง · กราฟนี้แสดงภาพรวมทุกจังหวัด</div>`;
+  }
+  function renderOfficeDocSummary(rows){
+    // Count each office once; at least one document number means the office has a document.
+    const officeKey=map.serviceOffice>=0?'serviceOffice':'name';
+    const offices=new Map();
+    rows.forEach((r,index)=>{
+      const office=text(r[officeKey])||text(r.name)||`ไม่ระบุ กฟส. ${index+1}`;
+      const placeKey=[text(r.province),office].join('|');
+      const entry=offices.get(placeKey)||{hasDocument:false};
+      if(text(r.documentNumber))entry.hasDocument=true;
+      offices.set(placeKey,entry);
+    });
+    const filters=[];
+    if(map.province>=0&&$('provinceFilter').value!=='__all')filters.push($('provinceFilter').value);
+    if(map.district>=0&&$('districtFilter').value!=='__all')filters.push('อำเภอ'+$('districtFilter').value);
+    if(extraFilterKey&&$('areaFilter').value!=='__all')filters.push($('areaFilter').value);
+    if(text($('searchInput').value))filters.push('คำค้น: '+text($('searchInput').value));
+    const total=offices.size;
+    const has=[...offices.values()].filter(x=>x.hasDocument).length;
+    const missing=Math.max(0,total-has);
+    $('officeDocHasCount').innerHTML=`${has.toLocaleString('th-TH')} <small>แห่ง</small>`;
+    $('officeDocMissingCount').innerHTML=`${missing.toLocaleString('th-TH')} <small>แห่ง</small>`;
+    $('officeDocTotal').textContent=`กฟส. ทั้งหมด ${total.toLocaleString('th-TH')} แห่ง`;
+    $('officeDocSummaryNote').textContent=filters.length?`สรุปสำหรับ ${filters.join(' · ')} · คำนวณจากข้อมูลที่นำเข้า โดยนับ กฟส. ไม่ซ้ำ`:`สรุปจากข้อมูล ${total.toLocaleString('th-TH')} แห่ง · มีเลขที่เอกสาร ${has.toLocaleString('th-TH')} แห่ง และไม่มีเลขที่เอกสาร ${missing.toLocaleString('th-TH')} แห่ง`;
+    return {total,has,missing};
+  }
+  function render(){const rows=filteredRows;const docSummary=renderOfficeDocSummary(rows);$('locationCount').textContent=docSummary.total.toLocaleString('th-TH');$('typeCount').textContent=docSummary.has.toLocaleString('th-TH');$('typeUnit').textContent='แห่ง';$('sideValue').textContent=rows.length.toLocaleString('th-TH');const activeFilters=[];if(map.province>=0&&$('provinceFilter').value!=='__all')activeFilters.push($('provinceFilter').value);if(map.district>=0&&$('districtFilter').value!=='__all')activeFilters.push($('districtFilter').value);if(extraFilterKey&&$('areaFilter').value!=='__all')activeFilters.push($('areaFilter').value);if(text($('searchInput').value))activeFilters.push('คำค้น: '+text($('searchInput').value));$('sideNote').textContent=activeFilters.length?activeFilters.join(' · '):'ทุกจังหวัดและ กฟส.';
+    renderProvincePercentChart();
+    const docRows=rows.filter(r=>text(r.documentNumber));$('docResultCount').textContent=map.documentNumber<0?'ไม่มีคอลัมน์เลขที่เอกสาร':`${docRows.length.toLocaleString('th-TH')} รายการมีเลขที่เอกสาร`;
+    if(map.documentNumber<0){$('documentResults').innerHTML='<div class="empty" style="grid-column:1/-1">ไม่พบคอลัมน์เลขที่เอกสารในข้อมูลที่นำเข้า กรุณาเพิ่มคอลัมน์ชื่อ “เลขที่เอกสาร” ใน Google Sheets แล้วอัปโหลด CSV ใหม่</div>'}
+    else if(!rows.length){$('documentResults').innerHTML='<div class="empty" style="grid-column:1/-1">ไม่พบรายการที่ตรงกับจังหวัด อำเภอ หรือคำค้นนี้</div>'}
+    else{$('documentResults').innerHTML=sortRows(rows).slice(0,100).map(r=>{const place=[r.serviceOffice,r.district,r.province].filter(Boolean).join(' · ');return `<div class="doc-result"><div class="doc-result-top"><span class="doc-number-label">เลขที่เอกสาร</span><strong class="doc-number${r.documentNumber?'':' missing'}">${esc(r.documentNumber||'ไม่ระบุเลขที่เอกสาร')}</strong></div><div class="doc-result-name">${esc(r.name)}</div><div class="doc-result-place">${esc(place||r.address||'ไม่ระบุพื้นที่')}</div></div>`}).join('')+(rows.length>100?'<div class="empty" style="grid-column:1/-1">แสดง 100 รายการแรกจากผลการค้นหาทั้งหมด</div>':'')}
+    const preferredRaw=[['documentNumber','เลขที่เอกสาร'],['serviceOffice','กฟส. / การไฟฟ้า'],['name','ชื่อสถานที่'],['province','จังหวัด'],['district','อำเภอ/เขต'],['date','วันที่'],['status','สถานะ'],['type','ประเภท'],['address','ที่อยู่'],['region','พื้นที่/เขตการไฟฟ้า'],['phone','โทรศัพท์']].filter(([k])=>map[k]>=0);const seenColumnIndexes=new Set();const preferred=preferredRaw.filter(([k])=>{const index=map[k];if(seenColumnIndexes.has(index))return false;seenColumnIndexes.add(index);return true});if(!preferred.length)preferred.push(['name','ชื่อสถานที่']);const displayCols=preferred.slice(0,8);$('tableHead').innerHTML='<tr><th>ลำดับ</th>'+displayCols.map(([k,label])=>`<th>${label}</th>`).join('')+'</tr>';const colspan=displayCols.length+1;$('tableCount').textContent=`ทั้งหมด ${rows.length.toLocaleString('th-TH')} รายการ`;$('tableBody').innerHTML=rows.length?sortRows(rows).slice(0,500).map((r,i)=>'<tr><td>'+ (i+1) +'</td>'+displayCols.map(([k])=>{const val=text(r[k])||'—';if(k==='name')return `<td><strong>${esc(val)}</strong></td>`;if(k==='type')return `<td><span class="pill">${esc(val)}</span></td>`;if(k==='status'){const pending=/รอดำเนินการ/.test(val);return `<td><span class="status-pill${pending?' pending':''}">${esc(val)}</span></td>`;}if(k==='address'||k==='district'||k==='region'||k==='serviceOffice')return `<td class="address-cell">${esc(val)}</td>`;return `<td>${esc(val)}</td>`}).join('')+'</tr>').join(''):`<tr><td colspan="${colspan}" class="empty">ไม่พบข้อมูลที่ตรงกับตัวกรอง</td></tr>`;
+  }
+  async function loadSheet(){setStatus('กำลังเชื่อมต่อข้อมูลจาก Google Sheets…');try{const response=await fetch(SHEET_CSV_URL,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const csv=await response.text();if(/<!doctype html|<html/i.test(csv.slice(0,300)))throw new Error('ชีตอาจต้องเข้าสู่ระบบหรือยังไม่ได้เปิดสิทธิ์อ่านข้อมูล');loadRecords(makeRows(parseCSV(csv)),'Google Sheets')}catch(err){if(allRows.length){setStatus(`ใช้ข้อมูล CSV ที่แนบมา ${allRows.length.toLocaleString('th-TH')} รายการ · เชื่อมต่อ Google Sheets ไม่สำเร็จ`,'error')}else{setStatus('ยังโหลดชีตอัตโนมัติไม่ได้ · กรุณานำเข้า CSV','error');$('documentResults').innerHTML='<div class="empty" style="grid-column:1/-1">ยังโหลดเลขที่เอกสารไม่ได้ · กรุณานำเข้าข้อมูล CSV จาก Google Sheets</div>';$('docResultCount').textContent='รอไฟล์ข้อมูล';$('tableBody').innerHTML='<tr><td colspan="7" class="empty">ยังไม่มีข้อมูลแสดงผล · เปิดชีต → ไฟล์ → ดาวน์โหลด → ค่าที่คั่นด้วยจุลภาค (.csv) แล้วนำเข้าในหน้านี้</td></tr>'}console.warn('Sheet loading failed:',err)}}
+  $('provinceFilter').addEventListener('change',()=>{updateDistrictOptions();updateServiceOfficeOptions();filtered()});$('districtFilter').addEventListener('change',filtered);$('areaFilter').addEventListener('change',filtered);$('searchInput').addEventListener('input',filtered);$('uploadBtn').addEventListener('click',()=>$('csvFile').click());$('csvFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const csv=await file.text();loadRecords(makeRows(parseCSV(csv)),file.name)}catch(err){setStatus('อ่านไฟล์ CSV ไม่สำเร็จ: '+err.message,'error');alert('อ่านไฟล์ CSV ไม่สำเร็จ กรุณาตรวจสอบแถวหัวตารางและข้อมูลสถานที่')}finally{e.target.value=''}});$('reloadBtn').addEventListener('click',loadSheet);try{loadRecords(makeRows(parseCSV(EMBEDDED_CSV)),'CSV Data ที่แนบมา')}catch(err){setStatus('อ่านข้อมูล CSV ที่แนบมาไม่สำเร็จ: '+err.message,'error')}loadSheet();
+})();
+</script>
+</body>
+</html>
