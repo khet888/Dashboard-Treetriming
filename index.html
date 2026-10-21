@@ -278,6 +278,119 @@
   }
 }
 
+
+
+/* Status summary charts directly under the data section heading */
+.status-report {
+  flex: 0 0 340px;
+  height: 340px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 0 10px 8px;
+  overflow: hidden;
+}
+.status-chart-grid {
+  flex: 0 0 174px;
+  height: 174px;
+  display: grid;
+  grid-template-columns: minmax(260px, .92fr) minmax(390px, 1.35fr);
+  gap: 8px;
+  min-height: 0;
+}
+.status-chart-card {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid #d6d6dc;
+  border-radius: 3px;
+  background: #fff;
+  padding: 7px 10px 6px;
+  overflow: hidden;
+}
+.status-chart-title {
+  color: #68646f;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.status-overall-content {
+  display: grid;
+  grid-template-columns: minmax(105px, 1fr) minmax(105px, .72fr);
+  align-items: center;
+  gap: 8px;
+  height: 132px;
+}
+.status-pie {
+  width: 132px;
+  height: 132px;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  margin: auto;
+  background: conic-gradient(#4285f4 0 20%, #ea4335 20% 100%);
+}
+.status-legend { display: flex; flex-direction: column; gap: 8px; font-size: 11px; color: #3d3d45; }
+.status-legend-item { display: flex; align-items: center; gap: 7px; line-height: 1.25; }
+.status-legend-swatch { width: 11px; height: 11px; border-radius: 50%; flex: 0 0 11px; }
+.status-province-chart-wrap { width: 100%; height: 143px; overflow: hidden; }
+#statusProvinceChart { display: block; width: 100%; height: 100%; overflow: visible; }
+.province-status-table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid #b8b8bf;
+  background: #fff;
+}
+.province-status-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+.province-status-table th {
+  color: #fff !important;
+  background: #6a548e !important;
+  border: 1px solid #c5b8d7 !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  padding: 4px 7px !important;
+  white-space: nowrap;
+}
+.province-status-table td {
+  background: #fff9ff;
+  color: #332b3e;
+  border: 1px solid #968b9e !important;
+  font-size: 12px !important;
+  text-align: right;
+  padding: 3px 7px !important;
+  line-height: 1.3 !important;
+  white-space: nowrap;
+}
+.province-status-table td:first-child { text-align: left; font-weight: 600; }
+.province-status-table tbody tr:nth-child(even) td { background: #f8f0fa; }
+@media (min-width: 951px) and (max-height: 780px) {
+  .status-report { flex-basis: 285px; height: 285px; }
+  .status-chart-grid { flex-basis: 150px; height: 150px; grid-template-columns: minmax(230px, .9fr) minmax(340px, 1.35fr); }
+  .status-overall-content { height: 112px; }
+  .status-pie { width: 110px; height: 110px; }
+  .status-province-chart-wrap { height: 119px; }
+}
+@media (max-width: 950px) {
+  .status-report { height: auto; flex-basis: auto; overflow: visible; }
+  .status-chart-grid { height: auto; flex-basis: auto; grid-template-columns: 1fr; }
+  .status-chart-card { min-height: 175px; }
+  .status-overall-content { height: 135px; }
+  .status-province-chart-wrap { height: 150px; }
+  .province-status-table-wrap { max-height: 220px; }
+}
+@media (max-width: 650px) {
+  .status-chart-grid { grid-template-columns: minmax(0, 1fr); }
+  .status-overall-content { grid-template-columns: 130px minmax(0, 1fr); }
+  .province-status-table th, .province-status-table td { font-size: 11px !important; padding: 4px 5px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -344,6 +457,29 @@
       </section>
       <section class="panel table-panel">
         <div class="table-head"><h2 class="panel-title">ข้อมูลสถานที่/สำนักงานการไฟฟ้า</h2><span class="count" id="tableCount">ทั้งหมด 0 รายการ</span></div>
+        <section class="status-report" id="statusReport" aria-label="สถานะรวมและสถานะรายจังหวัด">
+          <div class="status-chart-grid">
+            <section class="status-chart-card">
+              <h3 class="status-chart-title">สถานะรวม</h3>
+              <div class="status-overall-content">
+                <div class="status-pie" id="statusPie" role="img" aria-label="กราฟวงกลมสถานะรวม"></div>
+                <div class="status-legend" id="statusLegend"></div>
+              </div>
+            </section>
+            <section class="status-chart-card">
+              <h3 class="status-chart-title">สถานะรายจังหวัด</h3>
+              <div class="status-province-chart-wrap">
+                <svg id="statusProvinceChart" viewBox="0 0 650 185" role="img" aria-label="กราฟแท่งสถานะรายจังหวัด" preserveAspectRatio="xMidYMid meet"></svg>
+              </div>
+            </section>
+          </div>
+          <div class="province-status-table-wrap">
+            <table class="province-status-table">
+              <thead><tr><th>จังหวัด</th><th>ทั้งหมด</th><th>บันทึกแล้ว</th><th>รอดำเนินการ</th><th>% สำเร็จ</th></tr></thead>
+              <tbody id="provinceStatusBody"><tr><td colspan="5">กำลังสรุปข้อมูล…</td></tr></tbody>
+            </table>
+          </div>
+        </section>
         <div class="table-scroll"><table><thead id="tableHead"><tr><th>ลำดับ</th><th>ชื่อสถานที่</th><th>ประเภท</th><th>ที่อยู่</th><th>จังหวัด/พื้นที่</th><th>โทรศัพท์</th><th>สถานะ</th></tr></thead><tbody id="tableBody"><tr><td colspan="7" class="empty">กำลังรอข้อมูลจากชีต…</td></tr></tbody></table></div>
       </section>
       <div class="footer">ข้อมูลแสดงตามคอลัมน์ที่พบใน Google Sheets หรือไฟล์ CSV ที่นำเข้า</div>
@@ -423,6 +559,82 @@
       return `<div class="province-percent-row"><div><div class="province-name">${esc(item.province)}</div><div class="province-percent-sub">${item.count.toLocaleString('th-TH')} กฟส.</div></div><div class="province-bar-track" role="img" aria-label="${esc(item.province)} ${pct}%"><div class="province-bar-fill" style="width:${width}%"></div></div><div class="province-percent-value">${pct}%</div></div>`;
     }).join('')+`<div class="province-chart-summary">นับ กฟส. ไม่ซ้ำที่พบในข้อมูล ${counted.toLocaleString('th-TH')} แห่ง · ใช้ยอดอ้างอิงทั้งหมด ${TOTAL_GFS_COUNT} แห่ง · กราฟนี้แสดงภาพรวมทุกจังหวัด</div>`;
   }
+
+  function renderStatusDashboard(rows) {
+    const provinces = new Map();
+    rows.forEach((r, index) => {
+      const province = text(r.province) || 'ไม่ระบุจังหวัด';
+      const office = text(r.serviceOffice) || text(r.name) || 'รายการ ' + (index + 1);
+      const key = office.toLocaleLowerCase('th-TH');
+      if (!provinces.has(province)) provinces.set(province, new Map());
+      const offices = provinces.get(province);
+      const prev = offices.get(key) || { name: office, saved: false };
+      if (text(r.documentNumber) || /บันทึกแล้ว|บันทึกแล้วทั้งหมด/i.test(text(r.status))) prev.saved = true;
+      offices.set(key, prev);
+    });
+    const summary = [...provinces.entries()].map(([province, offices]) => {
+      const values = [...offices.values()];
+      const total = values.length;
+      const saved = values.filter(o => o.saved).length;
+      return { province, total, saved, pending: Math.max(0, total - saved), percent: total ? saved * 100 / total : 0 };
+    });
+    const total = summary.reduce((n, p) => n + p.total, 0);
+    const saved = summary.reduce((n, p) => n + p.saved, 0);
+    const pending = Math.max(0, total - saved);
+    const savedPercent = total ? saved * 100 / total : 0;
+    const pie = $('statusPie');
+    if (pie) {
+      pie.style.background = total
+        ? `conic-gradient(#4285f4 0 ${savedPercent}%, #ea4335 ${savedPercent}% 100%)`
+        : '#e6e9ef';
+      pie.setAttribute('aria-label', `บันทึกแล้ว ${saved} แห่ง, รอดำเนินการ ${pending} แห่ง จากทั้งหมด ${total} แห่ง`);
+    }
+    const legend = $('statusLegend');
+    if (legend) legend.innerHTML = [
+      ['#4285f4', 'บันทึกแล้วทั้งหมด', saved],
+      ['#ea4335', 'รอดำเนินการทั้งหมด', pending]
+    ].map(([color, label, count]) =>
+      `<div class="status-legend-item"><span class="status-legend-swatch" style="background:${color}"></span><span>${label}<br><strong>${Number(count).toLocaleString('th-TH')} แห่ง</strong></span></div>`
+    ).join('');
+    const svg = $('statusProvinceChart');
+    if (svg) {
+      if (!summary.length) {
+        svg.innerHTML = '<text x="20" y="65" font-size="12" fill="#888">ไม่มีข้อมูลจังหวัด</text>';
+      } else {
+        const width = 650, height = 185, left = 36, right = 130, top = 13, bottom = 133;
+        const plotWidth = width - left - right, plotHeight = bottom - top;
+        const maxTotal = Math.max(1, ...summary.map(p => p.total));
+        const tickStep = Math.max(1, Math.ceil(maxTotal / 3));
+        let pieces = '';
+        for (let tick = 0; tick <= maxTotal; tick += tickStep) {
+          const y = bottom - tick / maxTotal * plotHeight;
+          pieces += `<line x1="${left}" y1="${y}" x2="${left+plotWidth}" y2="${y}" stroke="#d5d5da" stroke-width="1"/><text x="${left-7}" y="${y+4}" text-anchor="end" font-size="10" fill="#444">${tick}</text>`;
+        }
+        const slot = plotWidth / summary.length;
+        const barWidth = Math.min(27, slot * 0.54);
+        summary.forEach((p, i) => {
+          const x = left + i * slot + (slot - barWidth) / 2;
+          const hSaved = p.saved / maxTotal * plotHeight;
+          const hPending = p.pending / maxTotal * plotHeight;
+          const savedY = bottom - hSaved;
+          const pendingY = bottom - hSaved - hPending;
+          pieces += `<rect x="${x}" y="${savedY}" width="${barWidth}" height="${hSaved}" fill="#65518a"/>`;
+          pieces += `<rect x="${x}" y="${pendingY}" width="${barWidth}" height="${hPending}" fill="#817b86"/>`;
+          const label = p.province.length > 7 ? p.province.slice(0, 6) + '…' : p.province;
+          const labelX = x + barWidth / 2;
+          pieces += `<text x="${labelX}" y="${bottom+15}" transform="rotate(-42 ${labelX} ${bottom+15})" text-anchor="end" font-size="10" fill="#34343a">${esc(label)}</text>`;
+        });
+        const legendX = width - 118;
+        pieces += `<rect x="${legendX}" y="17" width="10" height="10" rx="1" fill="#817b86"/><text x="${legendX+16}" y="26" font-size="10" fill="#35353b">รอดำเนินการ</text><rect x="${legendX}" y="36" width="10" height="10" rx="1" fill="#65518a"/><text x="${legendX+16}" y="45" font-size="10" fill="#35353b">บันทึกแล้ว</text><text x="11" y="72" transform="rotate(-90 11 72)" font-size="10" fill="#444">จำนวน</text><text x="${left+plotWidth/2}" y="180" text-anchor="middle" font-size="10" fill="#444">จังหวัด</text>`;
+        svg.innerHTML = pieces;
+      }
+    }
+    const body = $('provinceStatusBody');
+    if (body) body.innerHTML = summary.map(p =>
+      `<tr><td>${esc(p.province)}</td><td>${p.total.toLocaleString('th-TH')}</td><td>${p.saved.toLocaleString('th-TH')}</td><td>${p.pending.toLocaleString('th-TH')}</td><td>${p.percent.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2})}%</td></tr>`
+    ).join('') || '<tr><td colspan="5">ไม่มีข้อมูล</td></tr>';
+  }
+
   function renderOfficeDocSummary(rows){
     // Count each office once; at least one document number means the office has a document.
     const officeKey=map.serviceOffice>=0?'serviceOffice':'name';
@@ -448,7 +660,7 @@
     $('officeDocSummaryNote').textContent=filters.length?`สรุปสำหรับ ${filters.join(' · ')} · คำนวณจากข้อมูลที่นำเข้า โดยนับ กฟส. ไม่ซ้ำ`:`สรุปจากข้อมูล ${total.toLocaleString('th-TH')} แห่ง · มีเลขที่เอกสาร ${has.toLocaleString('th-TH')} แห่ง และไม่มีเลขที่เอกสาร ${missing.toLocaleString('th-TH')} แห่ง`;
     return {total,has,missing};
   }
-  function render(){const rows=filteredRows;const docSummary=renderOfficeDocSummary(rows);$('locationCount').textContent=docSummary.total.toLocaleString('th-TH');$('typeCount').textContent=docSummary.has.toLocaleString('th-TH');$('typeUnit').textContent='แห่ง';$('sideValue').textContent=rows.length.toLocaleString('th-TH');const activeFilters=[];if(map.province>=0&&$('provinceFilter').value!=='__all')activeFilters.push($('provinceFilter').value);if(map.district>=0&&$('districtFilter').value!=='__all')activeFilters.push($('districtFilter').value);if(extraFilterKey&&$('areaFilter').value!=='__all')activeFilters.push($('areaFilter').value);if(text($('searchInput').value))activeFilters.push('คำค้น: '+text($('searchInput').value));$('sideNote').textContent=activeFilters.length?activeFilters.join(' · '):'ทุกจังหวัดและ กฟส.';
+  function render(){const rows=filteredRows;renderStatusDashboard(allRows);const docSummary=renderOfficeDocSummary(rows);$('locationCount').textContent=docSummary.total.toLocaleString('th-TH');$('typeCount').textContent=docSummary.has.toLocaleString('th-TH');$('typeUnit').textContent='แห่ง';$('sideValue').textContent=rows.length.toLocaleString('th-TH');const activeFilters=[];if(map.province>=0&&$('provinceFilter').value!=='__all')activeFilters.push($('provinceFilter').value);if(map.district>=0&&$('districtFilter').value!=='__all')activeFilters.push($('districtFilter').value);if(extraFilterKey&&$('areaFilter').value!=='__all')activeFilters.push($('areaFilter').value);if(text($('searchInput').value))activeFilters.push('คำค้น: '+text($('searchInput').value));$('sideNote').textContent=activeFilters.length?activeFilters.join(' · '):'ทุกจังหวัดและ กฟส.';
     renderProvincePercentChart();
     const docRows=rows.filter(r=>text(r.documentNumber));$('docResultCount').textContent=map.documentNumber<0?'ไม่มีคอลัมน์เลขที่เอกสาร':`${docRows.length.toLocaleString('th-TH')} รายการมีเลขที่เอกสาร`;
     if(map.documentNumber<0){$('documentResults').innerHTML='<div class="empty" style="grid-column:1/-1">ไม่พบคอลัมน์เลขที่เอกสารในข้อมูลที่นำเข้า กรุณาเพิ่มคอลัมน์ชื่อ “เลขที่เอกสาร” ใน Google Sheets แล้วอัปโหลด CSV ใหม่</div>'}
