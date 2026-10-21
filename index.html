@@ -97,6 +97,124 @@
   .hero { margin-bottom: 10px; }
 }
 
+
+/* Keep the data section title visible without vertical page scrolling */
+@media (min-width: 951px) and (min-height: 560px) {
+  html, body {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden !important;
+  }
+  .shell {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+  }
+  .topline {
+    min-height: 26px !important;
+    margin: 0 !important;
+  }
+  .hero {
+    min-height: 42px !important;
+    margin: 0 !important;
+  }
+  .hero h1 {
+    font-size: 21px !important;
+    margin-bottom: 2px !important;
+  }
+  .hero p { font-size: 10px !important; }
+  .status { margin-top: 3px !important; font-size: 9px !important; }
+  .layout {
+    flex: 1 1 0 !important;
+    height: 0;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  .sidebar {
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    gap: 8px !important;
+  }
+  .main {
+    min-height: 0 !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-rows: 58px 112px minmax(120px, 1fr) !important;
+    gap: 8px !important;
+    overflow: hidden !important;
+  }
+  .metrics { margin: 0 !important; gap: 8px !important; min-height: 0 !important; }
+  .metric {
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 8px 12px !important;
+    gap: 9px !important;
+    border-radius: 11px !important;
+  }
+  .metric .mini-icon { width: 28px !important; height: 28px !important; }
+  .metric .label { font-size: 9px !important; }
+  .metric .value { font-size: 22px !important; }
+  .office-doc-summary {
+    height: 112px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    padding: 8px 12px !important;
+    margin: 0 !important;
+    border-radius: 11px !important;
+  }
+  .office-doc-summary .table-head {
+    padding: 0 0 5px !important;
+    min-height: 18px !important;
+  }
+  .office-doc-summary .panel-title { font-size: 11px !important; }
+  .office-doc-cards { padding: 0 !important; gap: 8px !important; }
+  .office-doc-card { padding: 6px 10px !important; border-radius: 8px !important; }
+  .office-doc-card-label { font-size: 9px !important; }
+  .office-doc-mark { width: 16px !important; height: 16px !important; font-size: 9px !important; }
+  .office-doc-card-value { margin-top: 2px !important; font-size: 20px !important; }
+  .office-doc-card-value small { font-size: 9px !important; }
+  .office-doc-note { padding: 4px 0 0 !important; font-size: 8px !important; line-height: 1.25 !important; }
+  .doc-results-panel { display: none !important; }
+  .table-panel {
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 8px 0 0 !important;
+    margin: 0 !important;
+    border-radius: 11px !important;
+  }
+  .table-panel > .table-head {
+    flex: 0 0 28px !important;
+    min-height: 28px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    background: #fff !important;
+    padding: 0 12px 6px !important;
+    align-items: center !important;
+  }
+  .table-panel > .table-head .panel-title {
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+  .table-scroll {
+    min-height: 0 !important;
+    flex: 1 1 0 !important;
+    overflow: auto !important;
+    border-top: 1px solid #edf1f6;
+  }
+  table { min-width: 620px !important; }
+  th { padding: 6px 8px !important; font-size: 9px !important; }
+  td { padding: 5px 8px !important; font-size: 9px !important; }
+  .status-pill, .pill { padding: 2px 5px !important; font-size: 8px !important; }
+  .footer { display: none !important; }
+}
+
 </style>
 </head>
 <body>
