@@ -247,6 +247,37 @@
   .table-scroll { overflow: auto !important; }
 }
 
+
+
+/* Larger, more readable text in the main electricity data table */
+.table-panel .table-scroll th {
+  font-size: 14px !important;
+  padding: 10px 12px !important;
+  line-height: 1.35 !important;
+}
+.table-panel .table-scroll td {
+  font-size: 14px !important;
+  padding: 9px 12px !important;
+  line-height: 1.4 !important;
+}
+.table-panel .table-scroll .status-pill,
+.table-panel .table-scroll .pill {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+  line-height: 1.35 !important;
+}
+.table-panel .table-scroll .address-cell {
+  min-width: 140px !important;
+}
+@media (max-width: 950px) {
+  .table-panel .table-scroll th {
+    font-size: 14px !important;
+  }
+  .table-panel .table-scroll td {
+    font-size: 14px !important;
+  }
+}
+
 </style>
 </head>
 <body>
